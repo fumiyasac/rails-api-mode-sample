@@ -1,0 +1,17 @@
+{
+  "name": "file_upload_api_mode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.12.8",
+    "gulp": "^3.9.1",
+    "gulp-htmlhint": "^0.3.1",
+    "gulp-plumber": "^1.1.0"
+  }
+}

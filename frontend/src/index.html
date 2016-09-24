@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <title>ファイルアップロードサンプル</title>
+    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="./fontawesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
+</head>
+<body >
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Rails5 &amp; API Mode Sample</a>
+        </div>
+    </div>
+</div>
+
+<section id="form-area" style="margin-top: 60px;">
+    <div class="container">
+        <h2>ファイルアップロードフォーム</h2>
+        <hr>
+        <form id="upload-form" method="POST" action="#" accept-charset="UTF-8" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input class="form-control" placeholder="タイトルを入力して下さい。" name="item[title]" type="text" id="title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" placeholder="本文を入力して下さい。" name="item[description]" cols="50" rows="10" id="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="picture">Picture:</label>
+                <input name="item[picture]" type="file" id="picture">
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary form-control" type="submit" id="submit-btn-upload" value="新規投稿をする">
+            </div>
+        </form>
+    </div>
+</section>
+
+<section id="just-intro" style="margin-bottom: 60px;">
+    <div class="container">
+        <h2>その他の情報</h2>
+        <hr>
+        <div class="row text-center pad-row">
+            <div class="col-md-4 col-sm-4">
+                <i class="fa fa-tasks fa-5x"></i>
+                <h4><strong>サンプルについて</strong></h4>
+                <p>
+                    こちらは特に自由に改変や変更をしていただいてOKです。PullRequestも大歓迎です。
+                </p>
+                <a href="https://github.com/fumiyasac/rails-api-mode-sample" class="btn btn-primary">Githubのページへ</a>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <i class="fa fa-group fa-5x"></i>
+                <h4><strong>作者について</strong></h4>
+                <p>
+                    Ruby &amp; PHP Engineer<br>(Sometimes iOS &amp; UI Design)
+                </p>
+                <a href="http://blog.just1factory.net/about" class="btn btn-primary">自分のブログへ</a>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <i class="fa fa-comments fa-5x"></i>
+                <h4><strong>CoEdo.rbについて</strong></h4>
+                <p>
+                    コワーキングスペース茅場町Co-Edoを拠点としたRuby/Railsのコミュニティです。
+                </p>
+                <a href="https://coedo-rails.doorkeeper.jp/" class="btn btn-primary">DoorKeeperのページへ</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="footer-sec">
+    <div class="container">
+        <div class="row  pad-bottom">
+            <div class="col-md-4">
+                <h4><strong>このサンプルに関して</strong></h4>
+                <p>
+                    Rails5とAPIモードに関するサンプルになります。
+                    Ajax経由でのAPIを介してのファイルのアップロードとJSON出力を行います。
+                </p>
+                <a href="http://127.0.0.1:3000/items.json">JSON出力はこちら</a>
+            </div>
+            <div class="col-md-4">
+                <h4><strong>ソーシャルメディア</strong></h4>
+                <p>
+                    <a href="https://www.facebook.com/fumiya.sakai.37"><i class="fa fa-facebook-square fa-3x" target="_blank"></i></a>
+                    <a href="https://twitter.com/fumisac"><i class="fa fa-twitter-square fa-3x" target="_blank"></i></a>
+                    <a href="http://www.slideshare.net/fumiyasakai37" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a>
+                    <a href="https://plus.google.com/u/0/107063318290694175422" target="_blank"><i class="fa fa-google-plus-square fa-3x"></i></a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h4><strong>今後の展開</strong></h4>
+                <p>
+                    このまんまだと説明が不十分な感じなので改めて後でQiitaにまとめます！<br/>
+                    CoEdo.rbのFacebookにも共有する予定です。
+                </p>
+                <a href="http://qiita.com/fumiyasac@github" target="_blank">Qiitaはこちら</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="./jquery/jquery-2.1.1.min.js"></script>
+<script src="./bootstrap/js/bootstrap.js"></script>
+<script>
+(function(win, doc) {
+  $('form').submit(function(e) {
+    $(this).find(':submit').prop('disabled', true);
+    $(this).find(':submit').val('送信中...');
+    e.preventDefault();
+    var fd = new FormData($(this)[0]);
+    //個別にパラメータ指定する場合は以下のようにする
+    //(参考) https://blog.hello-world.jp.net/javascript/2640/
+    //var fd = new FormData();
+    //fd.append('name', $(this).find(':text[name="name"]').val());
+    //fd.append('profile', $(this).find(':file[name="profile"]')[0].files[0]);
+    $.ajax('http://127.0.0.1:3000/items', {
+      method: 'POST',
+      processData: false,
+      contentType: false,
+      data: fd,
+      dataType: 'json',
+      success: function(json) {
+        $('form').find(':submit').val('画像の投稿が完了しました');
+        alert('ファイルが投稿されました');
+      },
+      error: function(json) {
+        $('form').find(':submit').prop('disabled', false);
+        $('form').find(':submit').val('新規投稿を再度チャレンジする');
+        alert('エラーが発生しました');
+      }
+    });
+  });
+})(this, document);
+</script>
+</body>
+</html>
