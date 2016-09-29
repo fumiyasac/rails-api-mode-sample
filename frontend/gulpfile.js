@@ -1,6 +1,5 @@
 //必要なモジュールを読み込む
 var gulp     = require('gulp');
-var plumber  = require('gulp-plumber');
 var htmlhint = require('gulp-htmlhint');
 var browser  = require('browser-sync');
 
